@@ -1,0 +1,19 @@
+{
+  "name": "securecorp-app",
+  "version": "1.0.0",
+  "description": "SecureCorp ticketing app",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.4",
+    "express": "^4.19.4",
+    "mysql2": "^3.5.2"
+  }
+}

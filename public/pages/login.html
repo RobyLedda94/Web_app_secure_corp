@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Link bootstrap -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Link al css -->
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Login</title>
+    
+</head>
+<body>
+    <!-- Sezione header -->
+    <header class="bg-black-blue py-5">
+        <div class="container py-3">
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <h1>Secure Web App</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Sezione main -->
+    <main>
+        <div class="container py-200">
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <label class="form-label" for="input_username">Username</label>
+                    <input type="text" class="form-control" id="input_username" name="input_username"
+                    placeholder="username">
+                    <div><span id="msg_error_username" class="style_txt_error"></span></div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <label class="form-label" for="input_password">Password</label>
+                    <input type="password" class="form-control" id="input_password" name="input_password"
+                    placeholder="Password">
+                    <div><span id="msg_error_password" class="style_txt_error"></span></div>
+                </div>
+                <div class="my-3 content_buttons">
+                    <button id="btn_login" type="button" class="btn btn-sm btn-primary">Login</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Sezione footer -->
+    <footer class="bg-black-blue py-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-4 my-2">
+                    <ul class="list-unstyled">
+                        <li>Centro Professionale Europeo</li>
+                        <li>Regione autonoma della Sardegna</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-4 my-2">
+                    <p>Secure Web App</p>
+                </div>
+                <div class="col-12 col-md-4 my-2">
+                    <p>© 2024 Secure Web App. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Script js -->
+    <script src="../js/login.js"></script>
+</body>
+</html>
