@@ -1,71 +1,94 @@
-// Definizione delle funzioni
+// ==============================
+// LOGIN SECURECORP
+// ==============================
 
-// Funzione validazione input
+// Regex sicurezza
+const usernameRegex = /^[a-zA-Z0-9_]{3,}$/;
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
-function validate_input(username, password) {
+// Elementi DOM
+const btnLogin = document.getElementById("btn_login");
+const msg_error_username = document.getElementById("msg_error_username");
+const msg_error_password = document.getElementById("msg_error_password");
+
+// ==============================
+// VALIDAZIONE
+// ==============================
+function validateInput(username, password) {
+
   let isValid = true;
 
-  // Reset messaggi di errore precedenti
-  msg_error_username.textContent = '';
-  msg_error_password.textContent = '';
+  msg_error_username.textContent = "";
+  msg_error_password.textContent = "";
 
-  // Controllo username vuoto
-  if (username === '' || username.trim().length === 0) {
-    msg_error_username.textContent = 'Inserire un valore valido nel campo username';
+  if (!usernameRegex.test(username)) {
+    msg_error_username.textContent =
+      "Username non valido (min 3 caratteri, solo lettere, numeri, underscore)";
     isValid = false;
   }
 
-  // Controllo lunghezza minima username (security best practice)
-  if (username.length < 3) {
-    msg_error_username.textContent = 'Username deve essere almeno 3 caratteri';
-    isValid = false;
-  }
-
-  // Controllo password vuota
-  if (password === '' || password.trim().length === 0) {
-    msg_error_password.textContent = 'Inserire un valore valido nel campo password';
-    isValid = false;
-  }
-
-  // Controllo lunghezza minima password
-  if (password.length < 8) {
-    msg_error_password.textContent = 'Password deve essere almeno 8 caratteri';
+  if (!passwordRegex.test(password)) {
+    msg_error_password.textContent =
+      "Password deve contenere almeno 8 caratteri, maiuscola, minuscola, numero e simbolo";
     isValid = false;
   }
 
   return isValid;
 }
 
+// ==============================
+// LOGIN FUNCTION
+// ==============================
+async function login(username, password) {
 
+  try {
 
-// Recupero gli elementi del DOM
+    btnLogin.disabled = true;
+    btnLogin.textContent = "Accesso in corso...";
 
-let btnLogin = document.getElementById('btn_login');
+    const response = await fetch("http://localhost:3000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ username, password })
+    });
 
-// Elementi messaggi di errore
+    const data = await response.json();
 
-let msg_error_username = document.getElementById('msg_error_username'); 
-let msg_error_password = document.getElementById('msg_error_password');
-
-
-const usernameRegex = /^[a-zA-Z0-9_]{3,}$/;
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-
-
-btnLogin.addEventListener('click', function() {
-    // Input username
-    let inputUsername = document.getElementById('input_username').value;
-    // Input password
-    let inputPassword = document.getElementById('input_password').value;
-
-    
-    // Chiamata alla funzione di validazione
-    if (validate_input(inputUsername, inputPassword)) {
-        // Se la validazione è positiva, procedo con la logica di login
-        console.log('Validazione superata. Procedo con il login...');
-        // Qui puoi aggiungere la logica per inviare i dati al server o eseguire altre azioni
-    } else {
-        console.log('Validazione fallita. Correggi gli errori e riprova.');
+    if (!response.ok) {
+      throw new Error(data.message || "Errore login");
     }
-    
+
+    // 🔐 Salvataggio token
+    sessionStorage.setItem("accessToken", data.accessToken);
+    sessionStorage.setItem("refreshToken", data.refreshToken);
+
+    // Redirect
+    window.location.href = "/dashboard.html";
+
+  } catch (error) {
+
+    alert(error.message);
+
+  } finally {
+
+    btnLogin.disabled = false;
+    btnLogin.textContent = "Login";
+
+  }
+}
+
+// ==============================
+// EVENT LISTENER
+// ==============================
+btnLogin.addEventListener("click", function () {
+
+  const inputUsername = document.getElementById("input_username").value.trim();
+  const inputPassword = document.getElementById("input_password").value.trim();
+
+  if (validateInput(inputUsername, inputPassword)) {
+    login(inputUsername, inputPassword);
+  }
+
 });
