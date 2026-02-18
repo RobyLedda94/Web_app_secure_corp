@@ -33,6 +33,8 @@ app.get("/test-db", async (req, res) => {
 
 // ===== ROUTES =====
 app.use("/api/auth", authRoutes);
+app.use("/api/users", usersRoutes);
+app.use("/api/tickets", ticketsRoutes);
 
 // ===== ROOT =====
 app.get("/", (req, res) => {

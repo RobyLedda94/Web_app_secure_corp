@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS personalizzato -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <title>SecureCorp - Dashboard Admin</title>
+</head>
+
+<body class="bg-light">
+
+<!-- HEADER -->
+<header class="bg-dark text-white shadow py-100">
+    <div class="container d-flex justify-content-between align-items-center">
+        <h1 class="h3 m-0">SecureCorp - Dashboard</h1>
+        <button id="btn_logout" class="btn btn-danger btn-sm">Logout</button>
+    </div>
+</header>
+
+<!-- MAIN -->
+<main class="container my-5">
+
+    <h2 class="mb-4">Dashboard Amministratore</h2>
+
+    <!-- ========================= -->
+    <!-- SEZIONE UTENTI -->
+    <!-- ========================= -->
+    <div class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4>👤 Utenti</h4>
+        </div>
+
+        <div id="users_container" class="row">
+            <!-- Card utenti generate da dashboard.js -->
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- SEZIONE TICKET -->
+    <!-- ========================= -->
+    <div>
+        <h4 class="mb-3">🎫 Ticket</h4>
+
+        <div id="tickets_container" class="row">
+            <!-- Card ticket generate da dashboard.js -->
+        </div>
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    © 2026 SecureCorp - All rights reserved
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Dashboard JS -->
+<script src="../js/dashboard.js"></script>
+
+</body>
+</html>
